@@ -7,12 +7,14 @@
   margin: 0px auto;
   justify-content: space-evenly;
 }
+a {
+  text-decoration: none;
+  color: #bec4c8;
+}
 
 button:hover,
 a:hover {
   cursor: pointer;
+  text-decoration: none;
 }
 
-/* 
-civaso5878@kameili.com - mock API 
-*/

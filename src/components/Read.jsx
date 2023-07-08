@@ -15,11 +15,10 @@ const Read = () => {
     axios
       .get("https://64a8d3eedca581464b86029b.mockapi.io/crudapp")
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setData(res.data);
       })
       .catch((error) => {
-        // Handle registration errors (e.g., display error message)
         console.error(error);
       });
   }
@@ -44,21 +43,18 @@ const Read = () => {
 
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
-    console.log("filter--", filter);
+    // console.log("filter--", filter);
   };
 
   const handleSortChange = (e) => {
     setSort(e.target.value);
-    console.log("sort--", sort);
+    // console.log("sort--", sort);
   };
 
   const filteredTasks = filter === "all" ? data : data.filter((task) => task.status === filter);
-  console.log("alll====", data);
+
   const sortedTasks = sort === "dueDate" ? [...filteredTasks].sort((a, b) => a.dueDate.localeCompare(b.dueDate)) : filteredTasks;
 
-  // function goto() {
-  //   navigate(`/card-details/${e.id}`, { state: { data: e } });
-  // }
   return (
     <>
       <div className="d-flex justify-content-start align-items-center mt-5">
@@ -90,7 +86,7 @@ const Read = () => {
                 <div className="card-body">
                   <h5 className="card-title">{item.title}</h5>
                   <h6 className="card-subtitle mb-2 text-muted">Description</h6>
-                  <p className="card-text">{item.desc.slice(0, 80)} ...</p>
+                  <p className="card-text">{item.desc} ...</p>
                   {/* <h5 id="r-m" onClick={goto}>Read More</h5> */}
                 </div>
                 <div className="card-body">
@@ -118,7 +114,7 @@ const Read = () => {
         </div>
       </div>
       <div className="d-grid gap-2 d-md-flex justify-content-md-end mx-5 fixed-bottom">
-        <Link to={"/"} className="btn btn-primary">
+        <Link to={"/create"} className="btn btn-primary">
           <i className="bi bi-plus-circle"> Add </i>
         </Link>
       </div>

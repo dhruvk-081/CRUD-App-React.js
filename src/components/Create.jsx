@@ -12,7 +12,7 @@ const Create = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("clciekd");
+    // console.log("clciekd");
 
     if (title !== "" && desc !== "" && dueDate !== "" && status !== "") {
       axios
@@ -26,7 +26,6 @@ const Create = () => {
           history("/read");
         })
         .catch((error) => {
-          // Handle registration errors (e.g., display error message)
           console.error(error);
         });
 
@@ -50,9 +49,6 @@ const Create = () => {
         </div>
         <div className="mb-3">
           <textarea className="form-control" rows="10" placeholder="Description" onChange={(e) => setDesc(e.target.value)}></textarea>
-          {/* <label htmlFor="exampleFormControlTextarea1" className="form-label">
-            Description
-          </label> */}
         </div>
 
         <div className="row g-2">

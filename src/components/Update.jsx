@@ -21,7 +21,7 @@ const Update = () => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    console.log("Id...", id);
+    // console.log("Id...", id);
     axios
       .put(`https://64a8d3eedca581464b86029b.mockapi.io/crudapp/${id}`, {
         title: title,
@@ -46,9 +46,6 @@ const Update = () => {
         </div>
         <div className="mb-3">
           <textarea className="form-control" rows="10" placeholder="Description" value={desc} onChange={(e) => setDesc(e.target.value)}></textarea>
-          {/* <label htmlFor="exampleFormControlTextarea1" className="form-label">
-            Description
-          </label> */}
         </div>
 
         <div className="row g-2">
