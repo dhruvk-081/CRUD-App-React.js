@@ -57,8 +57,12 @@ const Read = () => {
 
   return (
     <>
+      <div className="d-flex justify-content-between align-items-center pb-2 mb-1 mt-5">
+        <h2 className="">Dashboard</h2>
+        <button className="btn btn-danger align-self-right">Logout</button>
+      </div>
       <div className="d-flex justify-content-start align-items-center mt-5">
-        <div>
+        <div className="mx-3">
           <label htmlFor="filter">Filter:</label>
           <select id="filter" value={filter} onChange={handleFilterChange}>
             <option value="all">All</option>
@@ -68,7 +72,7 @@ const Read = () => {
           </select>
         </div>
 
-        <div>
+        <div className="">
           <label htmlFor="sort">Sort:</label>
           <select id="sort" value={sort} onChange={handleSortChange}>
             <option value="">None</option>
@@ -113,8 +117,8 @@ const Read = () => {
           })}
         </div>
       </div>
-      <div className="d-grid gap-2 d-md-flex justify-content-md-end mx-5 fixed-bottom">
-        <Link to={"/create"} className="btn btn-primary">
+      <div className="d-inline justify-content-md-end mb-5 mx-5 fixed-bottom">
+        <Link to={"/create"} className="btn btn-primary p-3">
           <i className="bi bi-plus-circle"> Add </i>
         </Link>
       </div>

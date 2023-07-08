@@ -6,22 +6,30 @@ const Signup = () => {
   const [name, setName] = useState("");
   const [useremail, setUserEmail] = useState("");
   const [password, setPassword] = useState("");
-  const history = useNavigate();
+  const navigate = useNavigate();
+
+  const generateToken = () => {
+    const randomToken = Math.random().toString(36).substr(2, 8);
+    return randomToken;
+  };
 
   const handleAuth = (e) => {
     e.preventDefault();
     // console.log("clciekd");
 
     if (name !== "" && useremail !== "" && password !== "") {
+      const token = generateToken();
+
       axios
         .post("https://64a963a18b9afaf4844aa065.mockapi.io/authentication", {
           name: name,
           useremail: useremail,
           password: password,
+          token: token,
         })
         .then(() => {
           alert("Signup Successfully !");
-          history("/");
+          navigate("/");
         })
         .catch((error) => {
           console.error(error);

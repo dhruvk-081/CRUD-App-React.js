@@ -24,3 +24,5 @@ yarn-error.log*
 /Dashboard.jsx
 /Dashboard
 /Login.css
+.Dashboard
+.Login.css

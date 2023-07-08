@@ -39,7 +39,7 @@ const Create = () => {
   };
   return (
     <>
-      <h2 className="">Create new task</h2>
+      <h2 className="mt-5">Create new task</h2>
       <form action="">
         <div className="form-floating mb-3">
           <input type="text" className="form-control" placeholder="Add Title" onChange={(e) => setTitle(e.target.value)} />
@@ -74,9 +74,9 @@ const Create = () => {
           <button className="btn btn-primary" type="submit" onClick={handleSubmit}>
             Add Task
           </button>
-          <Link to="/read">
-            <button className="btn btn-secondary mx-2"> Back </button>
-          </Link>
+          <button className="btn btn-secondary">
+            <Link to="/read">Back</Link>
+          </button>
         </div>
       </form>
       {/* <button>

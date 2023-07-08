@@ -22,6 +22,7 @@ const Update = () => {
   const handleUpdate = (e) => {
     e.preventDefault();
     // console.log("Id...", id);
+    if (title !== "" && desc !== "" && dueDate !== "" && status !== "") {
     axios
       .put(`https://64a8d3eedca581464b86029b.mockapi.io/crudapp/${id}`, {
         title: title,
@@ -32,11 +33,14 @@ const Update = () => {
       .then(() => {
         navigate("/read");
       });
+    } else {
+      alert("All fields are mandatory !");
+    }
   };
 
   return (
     <>
-      <h2 className="">Update task</h2>
+      <h2 className="mt-5">Update task</h2>
       <form action="">
         <div className="form-floating mb-3">
           <input type="text" className="form-control" placeholder="Add Title" value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -71,13 +75,13 @@ const Update = () => {
           <button className="btn btn-primary" type="submit" onClick={handleUpdate}>
             Update Task
           </button>
-          <Link to="/read">
-            <button className="btn btn-secondary mx-2"> Back </button>
-          </Link>
+          <button className="btn btn-secondary">
+            <Link to="/read">Back</Link>
+          </button>
         </div>
       </form>
       {/* <button>
-        <span id="boot-icon" className="bi bi-plus" style="font-size: 200px; -webkit-text-stroke-width: 7.6px; color: transparent; background-clip: text; background-image: -webkit-linear-gradient(top, rgb(255, 255, 0), rgb(255, 0, 0)); opacity: 1; border: hidden; border-radius: 22%; background-color: rgb(242, 242, 242);"></span>
+        <span id="boot-icon" className="bi bi-plus" style={{fontSize: "200px", webkitTextStrokeWidth: "7.6px", color: "transparent", backgroundClip: "text", backgroundImage: "linearGradient(top, rgb(255, 255, 0), rgb(255, 0, 0))", opacity: "1", border: "hidden", borderRadius: "22%", backgroundColor: "rgb(242, 242, 242)",}}></span>
       </button> */}
     </>
   );

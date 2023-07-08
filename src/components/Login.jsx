@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Header from "./Header";
+import axios from "axios";
 // import "./Login.css";
 
 const Login = () => {
@@ -8,8 +9,25 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = (e) => {
-   
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("https://64a963a18b9afaf4844aa065.mockapi.io/authentication", {
+        useremail,
+        password,
+      });
+
+      // Assuming the API returns a token upon successful login
+      const token = response.data.token;
+
+      // Store the token in localStorage or a state management solution (e.g., Redux)
+      localStorage.setItem("token", token);
+      navigate("/read");
+    } catch (error) {
+      console.log("Login failed", error);
+      alert("Login failed", error)
+    }
   };
 
   return (
