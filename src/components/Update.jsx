@@ -23,16 +23,16 @@ const Update = () => {
     e.preventDefault();
     // console.log("Id...", id);
     if (title !== "" && desc !== "" && dueDate !== "" && status !== "") {
-    axios
-      .put(`https://64a8d3eedca581464b86029b.mockapi.io/crudapp/${id}`, {
-        title: title,
-        desc: desc,
-        dueDate: dueDate,
-        status: status,
-      })
-      .then(() => {
-        navigate("/read");
-      });
+      axios
+        .put(`https://64a8d3eedca581464b86029b.mockapi.io/crudapp/${id}`, {
+          title: title,
+          desc: desc,
+          dueDate: dueDate,
+          status: status,
+        })
+        .then(() => {
+          navigate("/dashboard");
+        });
     } else {
       alert("All fields are mandatory !");
     }
@@ -76,7 +76,7 @@ const Update = () => {
             Update Task
           </button>
           <button className="btn btn-secondary">
-            <Link to="/read">Back</Link>
+            <Link to="/dashboard">Back</Link>
           </button>
         </div>
       </form>

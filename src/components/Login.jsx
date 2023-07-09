@@ -9,44 +9,63 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post("https://64a963a18b9afaf4844aa065.mockapi.io/authentication", {
-        useremail,
-        password,
-      });
+    if (validate()) {
+      //   axios
+      //     .get("https://64a963a18b9afaf4844aa065.mockapi.io/authentication")
+      //     .then((response) => {
+      //       const users = response.data;
 
-      // Assuming the API returns a token upon successful login
-      const token = response.data.token;
+      //       const user = users.find((user) => user.email === useremail);
 
-      // Store the token in localStorage or a state management solution (e.g., Redux)
-      localStorage.setItem("token", token);
-      navigate("/read");
-    } catch (error) {
-      console.log("Login failed", error);
-      alert("Login failed", error)
+      //       if (user && user.password === password) {
+      //         alert("Login successful");
+      navigate("/dashboard");
+      //       } else {
+      //         alert("Invalid email or password");
+      //       }
+      //     })
+      //     .catch((error) => {
+      //       console.log("Login failed", error);
+      //       alert("Login failed", error);
+      //     });
+      // }
     }
+  };
+
+  const validate = () => {
+    let result = true;
+    if (useremail === "" || useremail === null) {
+      alert("please enter email");
+      result = false;
+    }
+    if (password === "" || password === null) {
+      alert("please enter password");
+      result = false;
+    }
+
+    return result;
   };
 
   return (
     <>
-    <Header />
+      <Header />
       <div className="container">
         <h2 className="mt-5 mb-5">
-          <i class="bi bi-person-fill"></i> Login
+          <i className="bi bi-person-fill"></i> Login
         </h2>
         <form action="">
           <div className="form-floating mb-3">
-            <input type="text" className="form-control" value={useremail} placeholder="User Email" onChange={(e) => setUserEmail(e.target.value)} />
+            <input type="email" className="form-control" value={useremail} placeholder="User Email" onChange={(e) => setUserEmail(e.target.value)} />
             <label htmlFor="exampleFormControlInput1" className="form-label">
               User Email
             </label>
           </div>
 
           <div className="form-floating mb-3">
-            <input type="text" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" className="form-control" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <label htmlFor="exampleFormControlInput1" className="form-label">
               Password
             </label>
@@ -54,11 +73,11 @@ const Login = () => {
 
           <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
             <button className="btn btn-primary" type="submit" onClick={handleLogin}>
-              <i class="bi bi-person-fill"></i> Login
+              <i className="bi bi-person-fill"></i> Login
             </button>
-            <button className="btn btn-secondary mx-2">
+            <button className="btn btn-secondary">
               <Link to="/signup">
-                <i class="bi bi-person-plus-fill"></i> Signup
+                <i className="bi bi-person-plus-fill"></i> Signup
               </Link>
             </button>
           </div>

@@ -48,7 +48,7 @@ const Signup = () => {
     <>
       <div className="container">
         <h2 className="mt-5 mb-5">
-          <i class="bi bi-person-plus-fill"></i> Signup
+          <i className="bi bi-person-plus-fill"></i> Signup
         </h2>
         <form action="">
           <div className="form-floating mb-3">
@@ -66,7 +66,7 @@ const Signup = () => {
           </div>
 
           <div className="form-floating mb-3">
-            <input type="text" className="form-control" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" className="form-control" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
             <label htmlFor="exampleFormControlInput1" className="form-label">
               Password
             </label>
@@ -74,11 +74,11 @@ const Signup = () => {
 
           <div className="d-grid gap-2 d-md-flex justify-content-md-end mt-5">
             <button className="btn btn-primary" type="submit" onClick={handleAuth}>
-              <i class="bi bi-person-plus-fill"></i> Signup
+              <i className="bi bi-person-plus-fill"></i> Signup
             </button>
             <button className="btn btn-secondary">
               <Link to="/">
-                <i class="bi bi-person-fill"></i> Login
+                <i className="bi bi-person-fill"></i> Login
               </Link>
             </button>
           </div>

@@ -23,7 +23,7 @@ const Create = () => {
           status: status,
         })
         .then(() => {
-          history("/read");
+          history("/dashboard");
         })
         .catch((error) => {
           console.error(error);
@@ -75,7 +75,7 @@ const Create = () => {
             Add Task
           </button>
           <button className="btn btn-secondary">
-            <Link to="/read">Back</Link>
+            <Link to="/dashboard">Back</Link>
           </button>
         </div>
       </form>

@@ -3,6 +3,7 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import CardData from "./CardData";
 
 const Read = () => {
   const [data, setData] = useState([]);
@@ -41,6 +42,10 @@ const Read = () => {
     localStorage.setItem("status", status);
   };
 
+  const handleLogout = () => {
+    navigate("/");
+  };
+
   const handleFilterChange = (e) => {
     setFilter(e.target.value);
     // console.log("filter--", filter);
@@ -53,13 +58,17 @@ const Read = () => {
 
   const filteredTasks = filter === "all" ? data : data.filter((task) => task.status === filter);
 
-  const sortedTasks = sort === "dueDate" ? [...filteredTasks].sort((a, b) => a.dueDate.localeCompare(b.dueDate)) : filteredTasks;
+  const sortedTasks = sort === "dueDate" ? [...filteredTasks].sort((a, b) => a.dueDate.localeCompare(b.dueDate)) : sort === "status" ? [...filteredTasks].sort((a, b) => a.status.localeCompare(b.status)) : filteredTasks;
+
+  const tasksToRender = sort ? sortedTasks : filteredTasks;
 
   return (
     <>
       <div className="d-flex justify-content-between align-items-center pb-2 mb-1 mt-5">
         <h2 className="">Dashboard</h2>
-        <button className="btn btn-danger align-self-right">Logout</button>
+        <button className="btn btn-danger align-self-right" onClick={handleLogout}>
+          Logout
+        </button>
       </div>
       <div className="d-flex justify-content-start align-items-center mt-5">
         <div className="mx-3">
@@ -83,41 +92,45 @@ const Read = () => {
       </div>
 
       <div className="container-fluid mt-5 mb-5">
-        <div className="wrapper row">
-          {filteredTasks.map((item) => {
-            return (
-              <div className="card mb-3" style={{ width: "18rem" }} key={item.id}>
-                <div className="card-body">
-                  <h5 className="card-title">{item.title}</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">Description</h6>
-                  <p className="card-text">{item.desc} ...</p>
-                  {/* <h5 id="r-m" onClick={goto}>Read More</h5> */}
-                </div>
-                <div className="card-body">
-                  <p className="card-text mt-3">
-                    <small className="text-muted">Due Date : {item.dueDate}</small>
-                  </p>
-                  <p className="card-text">
-                    <small className="text-muted">Status : {item.status}</small>
-                  </p>
-                </div>
+        {data.length === 0 ? (
+          <h3 className="text-center">Add Tasks</h3>
+        ) : (
+          <div className="wrapper row">
+            {tasksToRender.map((item) => {
+              return (
+                <div className="card mb-3" style={{ width: "18rem" }} key={item.id}>
+                  <div className="card-body">
+                    <h5 className="card-title">{item.title}</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">Description</h6>
+                    <p className="card-text">{item.desc} ...</p>
+                    {/* <h5 id="r-m" onClick={goto}>Read More</h5> */}
+                  </div>
+                  <div className="card-body">
+                    <p className="card-text mt-3">
+                      <small className="text-muted">Due Date : {item.dueDate}</small>
+                    </p>
+                    <p className="card-text">
+                      <small className="text-muted">Status : {item.status}</small>
+                    </p>
+                  </div>
 
-                <div className="card-footer">
-                  <div className="d-flex justify-content-between align-items-center pb-2 mb-1">
-                    <Link to={"/update"} className="btn btn-primary" onClick={() => setToLocalStorage(item.id, item.title, item.desc, item.dueDate, item.status)}>
-                      Edit
-                    </Link>
-                    <button className="btn btn-danger align-self-right" onClick={() => handleDelete(item.id)}>
-                      Delete
-                    </button>
+                  <div className="card-footer">
+                    <div className="d-flex justify-content-between align-items-center pb-2 mb-1">
+                      <Link to={"/update"} className="btn btn-primary" onClick={() => setToLocalStorage(item.id, item.title, item.desc, item.dueDate, item.status)}>
+                        Edit
+                      </Link>
+                      <button className="btn btn-danger align-self-right" onClick={() => handleDelete(item.id)}>
+                        Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        )}
       </div>
-      <div className="d-inline justify-content-md-end mb-5 mx-5 fixed-bottom">
+      <div id="addbtn" className="d-inline justify-content-md-end mb-5 mx-5 fixed-bottom" style={{ width: "5rem" }}>
         <Link to={"/create"} className="btn btn-primary p-3">
           <i className="bi bi-plus-circle"> Add </i>
         </Link>
