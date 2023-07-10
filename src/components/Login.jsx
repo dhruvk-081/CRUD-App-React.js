@@ -14,26 +14,23 @@ const Login = () => {
     e.preventDefault();
 
     if (validate()) {
-      //   axios
-      //     .get("https://64a963a18b9afaf4844aa065.mockapi.io/authentication")
-      //     .then((response) => {
-      //       const users = response.data;
+      axios
+        .get("https://64a963a18b9afaf4844aa065.mockapi.io/authentication")
+        .then((response) => {
+          const users = response.data;
 
-      //       const user = users.find((user) => user.email === useremail);
+          const user = users.find((user) => user.useremail === useremail);
 
-      //       if (user && user.password === password) {
-      //         alert("Login successful");
-      navigate("/dashboard");
-      toast.success("Login Successfully !");
-      //       } else {
-      //         alert("Invalid email or password");
-      //       }
-      //     })
-      //     .catch((error) => {
-      //       console.log("Login failed", error);
-      //       alert("Login failed", error);
-      //     });
-      // }
+          if (user && user.password === password) {
+            navigate("/dashboard");
+            toast.success("Login Successfully !");
+          } else {
+            toast.error("Invalid email or password");
+          }
+        })
+        .catch((error) => {
+          toast.error("Login failed", error);
+        });
     }
   };
 
@@ -44,7 +41,7 @@ const Login = () => {
       result = false;
     }
     if (password === "" || password === null) {
-        toast.error("please enter password");
+      toast.error("please enter password");
       result = false;
     }
 
