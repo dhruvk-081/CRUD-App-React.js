@@ -22,6 +22,7 @@ const Login = () => {
           const user = users.find((user) => user.useremail === useremail);
 
           if (user && user.password === password) {
+            localStorage.setItem("user", JSON.stringify(user.token));
             navigate("/dashboard");
             toast.success("Login Successfully !");
           } else {

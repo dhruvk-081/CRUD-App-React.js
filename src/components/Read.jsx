@@ -44,6 +44,7 @@ const Read = () => {
 
   const handleLogout = () => {
     navigate("/");
+    localStorage.removeItem("user");
     toast.success("Logout Successfully !");
   };
 
@@ -62,6 +63,14 @@ const Read = () => {
   const sortedTasks = sort === "dueDate" ? [...filteredTasks].sort((a, b) => a.dueDate.localeCompare(b.dueDate)) : sort === "status" ? [...filteredTasks].sort((a, b) => a.status.localeCompare(b.status)) : filteredTasks;
 
   const tasksToRender = sort ? sortedTasks : filteredTasks;
+
+  useEffect(() => {
+    const user = localStorage.getItem("user");
+    if(!user) {
+      toast.error("Please Login !");
+      navigate("/")
+    }
+  }, [])
 
   return (
     <>
