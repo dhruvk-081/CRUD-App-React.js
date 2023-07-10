@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from "./Header";
 import axios from "axios";
+import { toast } from "react-toastify";
 // import "./Login.css";
 
 const Login = () => {
@@ -23,6 +24,7 @@ const Login = () => {
       //       if (user && user.password === password) {
       //         alert("Login successful");
       navigate("/dashboard");
+      toast.success("Login Successfully !");
       //       } else {
       //         alert("Invalid email or password");
       //       }
@@ -38,11 +40,11 @@ const Login = () => {
   const validate = () => {
     let result = true;
     if (useremail === "" || useremail === null) {
-      alert("please enter email");
+      toast.error("please enter email");
       result = false;
     }
     if (password === "" || password === null) {
-      alert("please enter password");
+        toast.error("please enter password");
       result = false;
     }
 
@@ -52,7 +54,7 @@ const Login = () => {
   return (
     <>
       <Header />
-      <div className="container">
+      <div id="widt-50" className="container">
         <h2 className="mt-5 mb-5">
           <i className="bi bi-person-fill"></i> Login
         </h2>
@@ -75,10 +77,8 @@ const Login = () => {
             <button className="btn btn-primary" type="submit" onClick={handleLogin}>
               <i className="bi bi-person-fill"></i> Login
             </button>
-            <button className="btn btn-secondary">
-              <Link to="/signup">
-                <i className="bi bi-person-plus-fill"></i> Signup
-              </Link>
+            <button className="btn btn-secondary" onClick={() => navigate("/signup")}>
+              <i className="bi bi-person-plus-fill"></i> Signup
             </button>
           </div>
         </form>

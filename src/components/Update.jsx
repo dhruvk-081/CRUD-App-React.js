@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Update = () => {
   const [id, setId] = useState("");
@@ -32,9 +33,10 @@ const Update = () => {
         })
         .then(() => {
           navigate("/dashboard");
+          toast.success("Update Successfully !");
         });
     } else {
-      alert("All fields are mandatory !");
+      toast.error("All fields are mandatory !");
     }
   };
 
@@ -75,8 +77,8 @@ const Update = () => {
           <button className="btn btn-primary" type="submit" onClick={handleUpdate}>
             Update Task
           </button>
-          <button className="btn btn-secondary">
-            <Link to="/dashboard">Back</Link>
+          <button className="btn btn-secondary" onClick={() => navigate("/dashboard")}>
+            Back
           </button>
         </div>
       </form>

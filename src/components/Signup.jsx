@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -28,45 +29,45 @@ const Signup = () => {
           token: token,
         })
         .then(() => {
-          alert("Signup Successfully !");
+          toast.success("Signup Successfully !");
           navigate("/");
         })
         .catch((error) => {
           console.error(error);
-          alert(error);
+          toast.error(error);
         });
 
       setName("");
       setUserEmail("");
       setPassword("");
     } else {
-      alert("All fields are mandatory !");
+      toast.error("All fields are mandatory !");
     }
   };
 
   return (
     <>
-      <div className="container">
-        <h2 className="mt-5 mb-5">
+      <div id="widt-50" className="container">
+        <h2 className="mb-5">
           <i className="bi bi-person-plus-fill"></i> Signup
         </h2>
         <form action="">
           <div className="form-floating mb-3">
-            <input type="text" className="form-control" placeholder="UserName" onChange={(e) => setName(e.target.value)} />
+            <input type="text" className="form-control" value={name} placeholder="UserName" onChange={(e) => setName(e.target.value)} />
             <label htmlFor="exampleFormControlInput1" className="form-label">
               Username
             </label>
           </div>
 
           <div className="form-floating mb-3">
-            <input type="email" className="form-control" placeholder="Email" onChange={(e) => setUserEmail(e.target.value)} />
+            <input type="email" className="form-control" value={useremail} placeholder="Email" onChange={(e) => setUserEmail(e.target.value)} />
             <label htmlFor="exampleFormControlInput1" className="form-label">
               Email
             </label>
           </div>
 
           <div className="form-floating mb-3">
-            <input type="password" className="form-control" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+            <input type="password" className="form-control" value={password} placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
             <label htmlFor="exampleFormControlInput1" className="form-label">
               Password
             </label>
@@ -76,10 +77,8 @@ const Signup = () => {
             <button className="btn btn-primary" type="submit" onClick={handleAuth}>
               <i className="bi bi-person-plus-fill"></i> Signup
             </button>
-            <button className="btn btn-secondary">
-              <Link to="/">
-                <i className="bi bi-person-fill"></i> Login
-              </Link>
+            <button className="btn btn-secondary" onClick={() => navigate("/")}>
+              <i className="bi bi-person-fill"></i> Login
             </button>
           </div>
         </form>

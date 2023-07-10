@@ -2,13 +2,14 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Create = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [status, setStatus] = useState("");
-  const history = useNavigate();
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -23,7 +24,7 @@ const Create = () => {
           status: status,
         })
         .then(() => {
-          history("/dashboard");
+          navigate("/dashboard");
         })
         .catch((error) => {
           console.error(error);
@@ -34,7 +35,7 @@ const Create = () => {
       setDueDate("");
       setStatus("");
     } else {
-      alert("All fields are mandatory !");
+      toast.error("All fields are mandatory !");
     }
   };
   return (
@@ -74,7 +75,7 @@ const Create = () => {
           <button className="btn btn-primary" type="submit" onClick={handleSubmit}>
             Add Task
           </button>
-          <button className="btn btn-secondary">
+          <button className="btn btn-secondary" onClick={() => navigate("/dashboard")}>
             <Link to="/dashboard">Back</Link>
           </button>
         </div>

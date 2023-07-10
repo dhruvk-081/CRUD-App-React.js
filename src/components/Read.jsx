@@ -3,7 +3,7 @@ import "../App.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import CardData from "./CardData";
+import { toast } from "react-toastify";
 
 const Read = () => {
   const [data, setData] = useState([]);
@@ -44,6 +44,7 @@ const Read = () => {
 
   const handleLogout = () => {
     navigate("/");
+    toast.success("Logout Successfully !");
   };
 
   const handleFilterChange = (e) => {
